@@ -1,9 +1,6 @@
-﻿
+﻿function update() {
 
-
-function update() {
-
-
+    //<editor-fold desc="Load Main Menu">
     // If Loading Main Menu
     if (gameMode == 0) {
         stars = new Stars();
@@ -14,8 +11,9 @@ function update() {
         mainMenu.initiate();
         gameMode = 1;
     }
+    //</editor-fold>
 
-
+    //<editor-fold desc="Main Menu">
     // If Main Menu
     if (gameMode == 1) {
 
@@ -39,8 +37,9 @@ function update() {
         }
 
     }
+    //</editor-fold>
 
-
+    //<editor-fold desc="Load Level">
     // If Loading Level
     if (gameMode == 2) {
         if (!stageLoading) {
@@ -58,15 +57,30 @@ function update() {
                 stageLoading = false;
                 stageText.destroy();
                 level.start(0);
+                livesText = game.add.text(0, game.world.height - 20, "Lives: " + player.lives, {
+                    font: "14px Arial",
+                    fill: "#ff0044",
+                    align: "center"
+                });
+                stageText.anchor.setTo(0.5, 0.5);
                 gameMode = 3;
             }, 2000);
         }
+        player.update();
     }
+    //</editor-fold>
 
-
-
+    //<editor-fold desc="Game Mode">
     // IF PLAYING GAME
     if(gameMode == 3){
+        if(player.lives < 0){
+            livesText.destroy();
+            level.destroy();
+            gameMode = 5;
+        }else {
+            livesText.text = "Lives:" + player.lives;
+        }
+
         stars.update(player);
         player.update();
         // Handle Input
@@ -113,7 +127,9 @@ function update() {
 
 
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Level Complete">
     if(gameMode == 4){
         if (!stageLoading) {
             stageLoading = true;
@@ -131,4 +147,24 @@ function update() {
             }, 2000);
         }
     }
+//</editor-fold>
+
+    //<editor-fold desc="Game Over">
+    if(gameMode == 5){
+        if (!stageLoading) {
+            stageLoading = true;
+            stageText = game.add.text(game.world.centerX, game.world.centerY - 50, "Game Over", {
+                font: "65px Arial",
+                fill: "#ff0044",
+                align: "center"
+            });
+            stageText.anchor.setTo(0.5, 0.5);
+            setTimeout(function () {
+                stageText.destroy();
+                stageLoading = false;
+                gameMode = 0;
+            }, 2000);
+        }
+    }
+    //</editor-fold>
 }

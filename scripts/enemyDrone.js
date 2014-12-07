@@ -1,13 +1,32 @@
 /**
  * Created by Matt on 12/6/2014.
+ *
+ * The drone is a simple enemy that sweeps left to right while moving down the screen.
+ * The drone will fire whenever the player crosses its path
  */
+
 function EnemyDrone(){
 
+    //<editor-fold desc="Variables">
     // Holds the sprite/physics objects created by Phaser.
     this.PhaserObj = {};
+    // Bullets
+    this.bullets = game.add.group();
+    this.bullets.enableBody = true;
+    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    this.bullets.createMultiple(10, 'bullet');
+    this.bullets.setAll('anchor.x', 0.5);
+    this.bullets.setAll('anchor.y', 1);
+    this.bullets.setAll('outOfBoundsKill', true);
+    this.bullets.setAll('checkWorldBounds', true);
+    // Explosions
+    this.explosions = [];
 
+    //</editor-fold>
+
+    //<editor-fold desc="Initiate">
     // Initiate the drone
-    this.initiate = function(x, y, target, lEdge, rEdge, hSpeed, hAccel, vSpeed, movingRight){
+    this.initiate = function(x, y, target, lEdge, rEdge, hSpeed, hAccel, vSpeed, movingRight, bulletSpeed, reloadSpeed){
         // Drone default settings (if parameter is undefined, default is used)
         x                           = typeof x           !== 'undefined' ? x           : 0;
         y                           = typeof y           !== 'undefined' ? y           : -32;
@@ -18,6 +37,8 @@ function EnemyDrone(){
         this.horizontalAcceleration = typeof hAccel      !== 'undefined' ? hAccel      : 5;
         this.verticalSpeed          = typeof vSpeed      !== 'undefined' ? vSpeed      : 30;
         this.movingRight            = typeof movingRight !== 'undefined' ? movingRight : true;
+        this.bulletSpeed            = typeof bulletSpeed !== 'undefined' ? bulletSpeed : 300;
+        this.reloadSpeed            = typeof reloadSpeed !== 'undefined' ? reloadSpeed : 750;
 
         // Create the sprite at the given coordinates
         this.PhaserObj = game.add.sprite(x, y, 'enemyDrone');
@@ -25,19 +46,30 @@ function EnemyDrone(){
         game.physics.enable(this.PhaserObj, Phaser.Physics.ARCADE);
         // Set the drones vertical speed
         this.PhaserObj.body.velocity.y = this.verticalSpeed;
+        // Set bullet time
+        this.bulletTime = 0;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Movement">
     // Accelarte the drone right (+) or left (-)
     this.moveSideways = function(amount){
         this.PhaserObj.body.velocity.x += amount;
     }
+    //</editor-fold">
 
+    //<editor-fold desc="Update">
     // UPDATE LOOP FOR AN ENEMY DRONE
     this.update = function() {
+        // Test the drone against the target (Player)
         game.physics.arcade.overlap(this.PhaserObj, this.target.PhaserObj, this.hit, null, this);
+        // Test the drone against the players weapons
         game.physics.arcade.overlap(this.PhaserObj, this.target.lasers, this.hit, null, this);
         game.physics.arcade.overlap(this.PhaserObj, this.target.bullets, this.hit, null, this);
         game.physics.arcade.overlap(this.PhaserObj, this.target.missiles, this.hit, null, this);
+        // Test my bullets against my target
+        game.physics.arcade.overlap(this.bullets, this.target.PhaserObj, this.bulletHit, null, this);
+
         // If I'm passed the bottom of the screen
         if (this.PhaserObj.body.y > game.height) {
             // Kill myself
@@ -63,15 +95,62 @@ function EnemyDrone(){
             // Start moving right
             this.movingRight = true;
         }
-    }
 
+        // If the target is in front of me
+        if(Math.abs(this.PhaserObj.x - this.target.PhaserObj.x) < 15 && this.PhaserObj.y < this.target.PhaserObj.y){
+            //  If I am ready to fire
+            if (game.time.now > this.bulletTime) {
+                // Grab the first bullet in the pool
+                this.bullet = this.bullets.getFirstExists(false);
+                // If a bullet was available
+                if (this.bullet) {
+                    //  Fire it
+                    this.bullet.reset(this.PhaserObj.x, this.PhaserObj.y + 28);
+                    this.bullet.body.velocity.y = this.bulletSpeed;
+                }
+                // Set timeout on ability to fire
+                this.bulletTime = game.time.now + this.reloadSpeed;
+            }
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Bullet Hit">
+    // If my bullet hits my target
+    this.bulletHit = function(target, bullet){
+        // Destroy the target and destroy the bullet.
+        target.kill();
+        bullet.kill();
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Hit">
+    // If I collide with the target or the target's weapons
     this.hit = function(drone, obj){
-        this.explosion = game.add.sprite(this.PhaserObj.body.x + this.PhaserObj.width / 2, this.PhaserObj.body.y + this.PhaserObj.height / 2, 'explosion');
-        this.explosion.anchor.setTo(0.5,0.5);
-        this.explosion.animations.add('explode');
-        this.explosion.animations.play('explode',20,false);
-        this.explosion.killOnComplete = true;
+
+        // Show an explosion immediately
+        this.explosions[0] = game.add.sprite(this.PhaserObj.body.x + this.PhaserObj.width / 2, this.PhaserObj.body.y + this.PhaserObj.height / 2, 'explosion');
+        this.explosions[0].anchor.setTo(0.5, 0.5);
+        this.explosions[0].animations.add('explode');
+        this.explosions[0].animations.play('explode', 20, false).killOnComplete = true;
+
+        // Create an array to hold my bullets that are still active
+        var remainingBullets = [];
+        // For each bullet in the group that is alive
+        this.bullets.forEachAlive(function(bullet){
+            // Add it to the array
+            remainingBullets.push(bullet);
+        }, this, null);
+        // For each of the alive bullets
+        remainingBullets.forEach( function(bullet){
+            // Push the bullet into the levels bullet handler to be handled after my death
+            level.strayWeapons.add(bullet, true);
+        })
+
+        // Kill the drone and whatever I collided with
         obj.kill();
         drone.kill();
     }
+    //</editor-fold>
+
 }

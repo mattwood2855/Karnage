@@ -3,6 +3,7 @@
  */
 function Player(){
 
+    this.lives = 0;
     this.playerSpeed = 45;
     this.playerPowerUpLevel = 0;
     //  Weapons
@@ -73,11 +74,13 @@ function Player(){
 
     this.hit = function(){
         this.explosion = game.add.sprite(this.PhaserObj.body.x + this.PhaserObj.width / 2, this.PhaserObj.body.y + this.PhaserObj.height / 2, 'explosion');
-        this.explosion.killOnComplete = true;
         this.explosion.anchor.setTo(0.5,0.5);
-        this.explosion.animations.add('explode');
+        this.explosion.animations.add('explode').killOnComplete = true;
         this.explosion.animations.play('explode',20,false);
 
+        this.lives--;
+
+        if(this.lives < 0) return;
         this.PhaserObj.reset(game.world.width / 2, game.world.height + this.PhaserObj.height, 1);
         this.returnToHome();
     }

@@ -33,3 +33,4 @@ var level;
 var stage;
 var stageLoading = false;
 var stageText = "";
+var livesText;

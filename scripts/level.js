@@ -6,6 +6,15 @@ function Level(){
     this.currentPhase = [];
     this.currentPhaseNumber = 0;
 
+    // Bullets
+    this.strayWeapons = game.add.group();
+    this.strayWeapons.enableBody = true;
+    this.strayWeapons.physicsBodyType = Phaser.Physics.ARCADE;
+    this.strayWeapons.setAll('anchor.x', 0.5);
+    this.strayWeapons.setAll('anchor.y', 0.5);
+    this.strayWeapons.setAll('outOfBoundsKill', true);
+    this.strayWeapons.setAll('checkWorldBounds', true);
+
     this.initiate = function(){
         this.enemyList.push({ phase: 0, type: new EnemyDrone(), x: 0, y: -32, target: player });
         this.enemyList.push({ phase: 1, type: new EnemyDrone(), x: 0, y: -32, target: player });
@@ -18,8 +27,10 @@ function Level(){
         this.loadEnemyPhase(phase);
     }
 
-    this.removeEnemy = function(enemy){
-        this.enemyList.splice(this.enemyList.indexOf(enemy));
+    this.destroy = function(){
+        this.currentPhase.forEach(function(enemy){
+            enemy.type.PhaserObj.destroy();
+        });
     }
 
     // LOAD THE NEXT WAVE OF BAD GUYS
@@ -67,7 +78,15 @@ function Level(){
                 gameMode = 4;
             }
         }
+
+        game.physics.arcade.overlap(this.strayWeapons, player.PhaserObj, this.strayWeaponsHit, null, this);
+
     }
 
+    this.strayWeaponsHit = function(weapon, player){
+        // Test my bullets against my target
+        weapon.kill();
+        player.kill();
+    };
 
 }
