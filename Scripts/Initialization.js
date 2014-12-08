@@ -31,6 +31,7 @@ var firedMissiles = [];
 
 var level;
 var stage;
+var numberOfStages = 1;
 var stageLoading = false;
 var stageText = "";
 var livesText;

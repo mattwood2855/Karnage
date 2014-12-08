@@ -44,10 +44,13 @@ function EnemyDrone(){
         this.PhaserObj = game.add.sprite(x, y, 'enemyDrone');
         // Enable collision detection on the drone
         game.physics.enable(this.PhaserObj, Phaser.Physics.ARCADE);
+        // Add on kill event
+        //this.PhaserObj.events.onKilled.add(this.hit, this);
         // Set the drones vertical speed
         this.PhaserObj.body.velocity.y = this.verticalSpeed;
         // Set bullet time
         this.bulletTime = 0;
+        this.initiated = true;
     }
     //</editor-fold>
 
@@ -61,6 +64,7 @@ function EnemyDrone(){
     //<editor-fold desc="Update">
     // UPDATE LOOP FOR AN ENEMY DRONE
     this.update = function() {
+        if(!this.initiated) return;
         // Test the drone against the target (Player)
         game.physics.arcade.overlap(this.PhaserObj, this.target.PhaserObj, this.hit, null, this);
         // Test the drone against the players weapons

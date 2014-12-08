@@ -5,7 +5,7 @@ function Player(){
 
     this.lives = 0;
     this.playerSpeed = 45;
-    this.playerPowerUpLevel = 0;
+    this.powerUpLevel = 0;
     //  Weapons
     // Laser
     this.lasers = game.add.group();
@@ -96,9 +96,9 @@ function Player(){
                     this.laser.reset(this.PhaserObj.x, this.PhaserObj.y - 28);
                     this.laser.body.velocity.y = -350;
                     // Set the next bullet to be fired in 300 milliseconds
-                    if (this.playerPowerUpLevel == 0) this.bulletTime = game.time.now + 400;
-                    if (this.playerPowerUpLevel == 1) this.bulletTime = game.time.now + 175;
-                    if (this.playerPowerUpLevel == 2) this.bulletTime = game.time.now + 75;
+                    if (this.powerUpLevel == 0) this.bulletTime = game.time.now + 400;
+                    if (this.powerUpLevel == 1) this.bulletTime = game.time.now + 200;
+                    if (this.powerUpLevel == 2) this.bulletTime = game.time.now + 100;
                 }
             }
             if (this.playerWeapon == 1) {
@@ -158,4 +158,8 @@ function Player(){
         this.PhaserObj.body.velocity.x += this.playerSpeed;
     }
 
+    this.powerUp = function(pUp){
+        if(this.powerUpLevel < 2)
+            this.powerUpLevel++;
+    }
 }

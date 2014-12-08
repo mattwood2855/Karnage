@@ -8,6 +8,7 @@
     game.load.image('bullet', 'assets/Images/bullet.png');
     game.load.image('missile', 'assets/Images/missile.png');
     game.load.image('star', 'assets/Images/star.png');
+    game.load.spritesheet('powerUp', 'assets/Images/powerUpSprite.png', 42, 42, 90);
     game.load.audio('bgmusic', ['assets/Music/bgmusic.mp3', 'assets/Music/bgmusic.ogg']);
 
     game.load.image('mainMenuLogo', 'assets/Images/mainMenuLogo.png');

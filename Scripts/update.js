@@ -51,7 +51,7 @@
             });
             stageText.anchor.setTo(0.5, 0.5);
             level = new Level();
-            level.initiate();
+            level.initiate(player, stage);
             player.returnToHome();
             setTimeout(function () {
                 stageLoading = false;
@@ -131,6 +131,7 @@
 
     //<editor-fold desc="Level Complete">
     if(gameMode == 4){
+        player.update();
         if (!stageLoading) {
             stageLoading = true;
             stageText = game.add.text(game.world.centerX, game.world.centerY - 50, "Level " + stage + " Complete", {
@@ -139,11 +140,16 @@
                 align: "center"
             });
             stageText.anchor.setTo(0.5, 0.5);
-            player.returnToHome();
             setTimeout(function () {
                 stageText.destroy();
                 stageLoading = false;
-                gameMode = 2;
+                if(stage<numberOfStages) {
+                    stage++
+                    gameMode = 2;
+                }
+                else{
+                    gameMode = 6;
+                }
             }, 2000);
         }
     }
@@ -152,6 +158,7 @@
     //<editor-fold desc="Game Over">
     if(gameMode == 5){
         if (!stageLoading) {
+            level.destroy();
             stageLoading = true;
             stageText = game.add.text(game.world.centerX, game.world.centerY - 50, "Game Over", {
                 font: "65px Arial",
@@ -164,6 +171,25 @@
                 stageLoading = false;
                 gameMode = 0;
             }, 2000);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Win">
+    if(gameMode == 6){
+        if (!stageLoading) {
+            stageLoading = true;
+            stageText = game.add.text(game.world.centerX, game.world.centerY - 50, "You Win! Enjoy your cake. - GlaDoze", {
+                font: "65px Arial",
+                fill: "#ff0044",
+                align: "center"
+            });
+            stageText.anchor.setTo(0.5, 0.5);
+            setTimeout(function () {
+                stageText.destroy();
+                stageLoading = false;
+                gameMode = 0;
+            }, 3000);
         }
     }
     //</editor-fold>

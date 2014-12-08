@@ -1,0 +1,13 @@
+{
+  "enemies":[
+    {"phase": 0, "type": 0, "x": 0, "y": -32, "target": "player" },
+    {"phase": 0, "type": 420, "x": 0, "y": -32, "direction": 90, "speed": 2, "target": "player"},
+    {"phase": 1, "type": 0, "x": 0, "y": -32, "target": "player" },
+    {"phase": 2, "type": 420, "x": 0, "y": -32, "direction": 90, "speed": 2, "target": "player"},
+    {"phase": 2, "type": 0, "x": 0, "y": -32, "target": "player" },
+    {"phase": 3, "type": 420, "x": 0, "y": -32, "direction": 90, "speed": 2, "target": "player"},
+    {"phase": 3, "type": 0, "x": 0, "y": -32, "target": "player"},
+    {"phase": 4, "type": 0, "x": 0, "y": -32, "target": "player" },
+    {"phase": 5, "type": 0, "x": 0, "y": -32, "target": "player" }
+  ]
+}
