@@ -1,9 +1,10 @@
 ﻿<html>
     <head>
-        <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="libs/phaser.min.js"></script>
         <script src="scripts/initialization.js"></script>
         <script src="scripts/preload.js"></script>
@@ -47,8 +48,8 @@
             var height = width * 3 / 4;
             game.width = width;
             game.height = height;
-            game.stage.bounds.width = width;
-            game.stage.bounds.height = height;
+            if(game.stage.bounds) game.stage.bounds.width = width;
+            if(game.stage.bounds) game.stage.bounds.height = height;
             game.world.setBounds(0, 0, width, height);
             game.camera.setSize(width, height);
             game.camera.setBoundsToWorld();

@@ -42,29 +42,42 @@
     //<editor-fold desc="Load Level">
     // If Loading Level
     if (gameMode == 2) {
+        // If this is our first run through this function
         if (!stageLoading) {
+            // Mark the level as loading
             stageLoading = true;
+            // Move the player to the home position
+            player.returnToHome();
+            // Display the title of the level we're moving to
             stageText = game.add.text(game.world.centerX, game.world.centerY - 50, "Level " + stage, {
                 font: "65px Arial",
                 fill: "#ff0044",
                 align: "center"
             });
             stageText.anchor.setTo(0.5, 0.5);
+
+            // Create a new level object
             level = new Level();
+            // Initiate it and pass the player and level to load
             level.initiate(player, stage);
-            player.returnToHome();
+            // Display the level title for three seconds and then
             setTimeout(function () {
-                stageLoading = false;
+                // Remove the text from the screen
                 stageText.destroy();
+                // Start the level
                 level.start(0);
-                livesText = game.add.text(0, game.world.height - 20, "Lives: " + player.lives, {
+                // Display the players lives on the bottom left of the screen
+                livesText = game.add.text(10, game.world.height - 20, "Lives: " + player.lives, {
                     font: "14px Arial",
                     fill: "#ff0044",
                     align: "center"
                 });
                 stageText.anchor.setTo(0.5, 0.5);
+                // Change to Playing game update loop
                 gameMode = 3;
-            }, 2000);
+                // Reset stage loading flag
+                stageLoading = false;
+            }, 3000);
         }
         player.update();
     }
@@ -187,6 +200,8 @@
             stageText.anchor.setTo(0.5, 0.5);
             setTimeout(function () {
                 stageText.destroy();
+                player.hit();
+                player.PhaserObj.kill();
                 stageLoading = false;
                 gameMode = 0;
             }, 3000);

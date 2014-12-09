@@ -66,13 +66,13 @@ function EnemyDrone(){
     this.update = function() {
         if(!this.initiated) return;
         // Test the drone against the target (Player)
-        game.physics.arcade.overlap(this.PhaserObj, this.target.PhaserObj, this.hit, null, this);
+        game.physics.arcade.overlap(this.PhaserObj, player.PhaserObj, this.hit, null, this);
         // Test the drone against the players weapons
-        game.physics.arcade.overlap(this.PhaserObj, this.target.lasers, this.hit, null, this);
-        game.physics.arcade.overlap(this.PhaserObj, this.target.bullets, this.hit, null, this);
-        game.physics.arcade.overlap(this.PhaserObj, this.target.missiles, this.hit, null, this);
+        game.physics.arcade.overlap(this.PhaserObj,player.lasers, this.hit, null, this);
+        game.physics.arcade.overlap(this.PhaserObj, player.bullets, this.hit, null, this);
+        game.physics.arcade.overlap(this.PhaserObj, player.missiles, this.hit, null, this);
         // Test my bullets against my target
-        game.physics.arcade.overlap(this.bullets, this.target.PhaserObj, this.bulletHit, null, this);
+        game.physics.arcade.overlap(this.bullets, player.PhaserObj, this.bulletHit, null, this);
 
         // If I'm passed the bottom of the screen
         if (this.PhaserObj.body.y > game.height) {
@@ -101,7 +101,7 @@ function EnemyDrone(){
         }
 
         // If the target is in front of me
-        if(Math.abs(this.PhaserObj.x - this.target.PhaserObj.x) < 15 && this.PhaserObj.y < this.target.PhaserObj.y){
+        if(Math.abs(this.PhaserObj.x - player.PhaserObj.x) < 15 && this.PhaserObj.y < player.PhaserObj.y){
             //  If I am ready to fire
             if (game.time.now > this.bulletTime) {
                 // Grab the first bullet in the pool

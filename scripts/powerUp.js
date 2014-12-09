@@ -3,8 +3,9 @@
  */
 function PowerUp(){
 
-    this.initiate = function(x, y, direction, speed, target){
+    this.initiated = false;
 
+    this.initiate = function(x, y, direction, speed, target){
         this.direction = direction || 90;
         this.speed = speed || 2;
         this.target = target || player;
