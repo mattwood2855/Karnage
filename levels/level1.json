@@ -1,16 +1,11 @@
 {
   "enemies":[
-    {"phase": 0, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 0 },
-    {"phase": 0, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 500 },
-    {"phase": 0, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 1500 },
-    {"phase": 1, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 0 },
-    {"phase": 2, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 0 },
-    {"phase": 3, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 0 },
-    {"phase": 4, "type": 0, "x": 0, "y": -32, "target": "player", "delay": 0 }
+    {"phase": 0, "type": "Drone", "data": {"x": 0, "y": -32, "target": "player", "delay": 0 }},
+    {"phase": 0, "type": "Stinger", "data": {"x": 300, "y": -32, "target": "player", "speed": 50, "burstSpeed": 300, "burstDelay": 1500 }},
+    {"phase": 1, "type": "Drone", "data": {"x": 0, "y": -32, "target": "player", "delay": 0 }}
   ],
   "powerUps":[
-    {"phase": 1, "type": 0, "x": 0, "y": -32, "direction": 90, "speed": 2, "target": "player", "delay": 0 },
-    {"phase": 2, "type": 0, "x": 0, "y": -32, "direction": 120, "speed": 2, "target": "player", "delay": 0 },
-    {"phase": 3, "type": 0, "x": 0, "y": -32, "direction": 60, "speed": 2, "target": "player", "delay": 0 }
+    {"phase": 1, "type": 0, "x": 0, "y": -32, "direction": 90, "speed": 2, "target": "player", "delay": 0 }
+
   ]
 }

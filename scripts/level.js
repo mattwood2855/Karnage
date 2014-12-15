@@ -11,7 +11,7 @@ function Level(){
     this.initiated = false;
 
     // Level controlled bullets
-    this.strayWeapons = game.add.group();
+    this.strayWeapons = engine.game.add.group();
     this.strayWeapons.enableBody = true;
     this.strayWeapons.physicsBodyType = Phaser.Physics.ARCADE;
     this.strayWeapons.setAll('anchor.x', 0.5);
@@ -22,7 +22,7 @@ function Level(){
 
     // Initiate the Level object
     this.initiate = function(player, level) {
-        console.log('level.initiate()');
+        if(engine.debug) console.log('level.initiate()');
         // Create a level scope reference to the player
         this.player = player;
         // Create a reference in scope of the AJAX call so that the promise (success) can access
@@ -39,17 +39,17 @@ function Level(){
                     data.enemies.forEach(function (e) {
                         var enemyType = {};
                         // If the enemy type is 0 then it's a Drone
-                        if (e.type == 0) {
+                        if (e.type == "Drone") {
                             enemyType = new EnemyDrone();
+                        }
+                        if (e.type == "Stinger") {
+                            enemyType = new EnemyStinger();
                         }
                         // Push the enemy into the level's enemyList
                         levelRef.enemyList.push({
                             phase: e.phase,
                             type: enemyType,
-                            x: e.x,
-                            y: e.y,
-                            target: levelRef.player,
-                            delay: e.delay
+                            data: e.data
                         });
                     });
                 }
@@ -73,18 +73,18 @@ function Level(){
                 }
 
                 this.initiated = true;
-                console.log('level.initiate() Complete');
-                console.log('->Enemies', levelRef.enemyList);
-                console.log('->PowerUps', levelRef.powerUps);
+                if(engine.debug) console.log('level.initiate() Complete');
+                if(engine.debug) console.log('->Enemies', levelRef.enemyList);
+                if(engine.debug) console.log('->PowerUps', levelRef.powerUps);
             },
             error: function(jqxhr, error, message){
-                console.log(error, message);
+                if(debug) console.log(error, message);
             }
         })
     };
 
     this.start = function(phase){
-        console.log('level.start() Loading Phase: ' + phase);
+        if(engine.debug) console.log('level.start() Loading Phase: ' + phase);
         this.loadEnemyPhase(phase);
     }
 
@@ -98,8 +98,8 @@ function Level(){
     this.createEnemyTimeoutHandler = function(enemyToLoad){
         // By returning a function with the parameters in the scope of this function we allow ourselves to set this function in a time out and keep its original reference
         return function () {
-            console.log("Initiate enemy ", enemyToLoad)
-            enemyToLoad.type.initiate(enemyToLoad.x, enemyToLoad.y, enemyToLoad.target);
+            if(engine.debug) console.log("Initiate enemy ", enemyToLoad)
+            enemyToLoad.type.initiate(enemyToLoad.data);
         }
     }
 
@@ -124,7 +124,7 @@ function Level(){
                 this.currentPhase.push(this.enemyList[x]);
             }
         }
-        console.log("loaded " + this.currentPhase.length + " from phase " + phaseNumber, this.currentPhase );
+        if(engine.debug) console.log("loaded " + this.currentPhase.length + " from phase " + phaseNumber, this.currentPhase );
 
         // Activate all entities from this phase
         for (var x = 0; x < this.currentPhase.length; x++) {
@@ -168,6 +168,7 @@ function Level(){
         }
 
         for(var x = 0; x < this.currentPowerUps.length; x++){
+            if(this.currentPowerUps[x].type.PhaserObj != null)
             if(this.currentPowerUps[x].type.PhaserObj.alive){
                 this.currentPowerUps[x].type.update();
             }
@@ -178,11 +179,14 @@ function Level(){
             this.currentPhaseNumber++;
             this.loadEnemyPhase(this.currentPhaseNumber);
             if(this.currentPhase.length == 0){
+                for(var x = 0; x < this.currentPowerUps.length; x++){
+                        this.currentPowerUps[x].type.PhaserObj.destroy();
+                }
                 gameMode = 4;
             }
         }
 
-        game.physics.arcade.overlap(this.strayWeapons, player.PhaserObj, this.strayWeaponsHit, null, this);
+        engine.game.physics.arcade.overlap(this.strayWeapons, engine.player.PhaserObj, this.strayWeaponsHit, null, this);
 
     }
 

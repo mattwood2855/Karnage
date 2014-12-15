@@ -1,74 +1,40 @@
-﻿<html>
+﻿<!DOCHTML>
+<html>
     <head>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <title>Karnage</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div id="canvas" class="col-md-12"></div>
+            </div>
+        </div>
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="libs/phaser.min.js"></script>
-        <script src="scripts/initialization.js"></script>
-        <script src="scripts/preload.js"></script>
-        <script src="scripts/create.js"></script>
+
+        <script src="libs/phaser/phaser.min.js"></script>
+
         <script src="scripts/powerUp.js"></script>
         <script src="scripts/stars.js"></script>
         <script src="scripts/mainMenu.js"></script>
         <script src="scripts/jetPuffs.js"></script>
         <script src="scripts/enemyDrone.js"></script>
+        <script src="scripts/enemyStinger.js"></script>
         <script src="scripts/level.js"></script>
+        <script src="scripts/weaponMissile.js"></script>
         <script src="scripts/player.js"></script>
-        <script src="scripts/update.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div id="phasercanvas" class="col-md-12"></div>
-            </div>
-        </div>
+        <script src="scripts/karnage.js"></script>
+        <script>
+            engine.start();
+
+            window.onload = function () {
+                $(window).resize(function () {
+                    engine.resizeGame();
+                });
+            }
+
+        </script>
     </body>
 </html>
-
-<script type="text/javascript">
-    
-    
-    window.onload = function () {
-
-        width = $('#phasercanvas').width();
-        height = width / 4 * 3;
-
-        game = new Phaser.Game(width, height, Phaser.AUTO, 'phasercanvas', { preload: preload, create: create, update: update });
-
-        $(window).resize(function () {
-            resizeGame(game);
-        });
-
-        function resizeGame(game) {
-            if (game == null)
-                return;
-            var width = $('#phasercanvas').width();
-            var height = width * 3 / 4;
-            game.width = width;
-            game.height = height;
-            if(game.stage.bounds) game.stage.bounds.width = width;
-            if(game.stage.bounds) game.stage.bounds.height = height;
-            game.world.setBounds(0, 0, width, height);
-            game.camera.setSize(width, height);
-            game.camera.setBoundsToWorld();
-            if (game.renderType === Phaser.WEBGL) {
-                game.renderer.resize(width, height);
-            }
-        }
-
-        
-
-        
-
-        function resetBullet(bullet) {
-
-            //  Called if the bullet goes out of the screen
-            bullet.kill();
-
-        }
-
-    };
-
-</script>
