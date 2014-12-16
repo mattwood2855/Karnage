@@ -246,7 +246,7 @@ function Karnage() {
                  engine.player.update();
                  if (!engine.stageLoading) {
                      engine.stageLoading = true;
-                     engine.stageText = game.add.text(engine.game.world.centerX, engine.game.world.centerY - 50, "Level " + engine.stage + " Complete", {
+                     engine.stageText = engine.game.add.text(engine.game.world.centerX, engine.game.world.centerY - 50, "Level " + engine.stage + " Complete", {
                          font: "65px Arial",
                          fill: "#ff0044",
                          align: "center"
@@ -291,7 +291,7 @@ function Karnage() {
              if (engine.gameMode == 6) {
                  if (!engine.stageLoading) {
                      engine.stageLoading = true;
-                     engine.stageText = game.add.text(engine.game.world.centerX, engine.game.world.centerY - 50, "You Win! Enjoy your cake. - GlaDoze", {
+                     engine.stageText = engine.game.add.text(engine.game.world.centerX, engine.game.world.centerY - 50, "You Win! Enjoy your cake. - GlaDoze", {
                          font: "65px Arial",
                          fill: "#ff0044",
                          align: "center"

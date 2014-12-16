@@ -34,20 +34,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="karnage.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="karnage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/karnage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="665" max-vertical-offset="2465">
-              <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5353645" vertical-offset="970" max-vertical-offset="2465">
+              <caret line="262" column="49" selection-start-line="262" selection-start-column="49" selection-end-line="262" selection-end-column="49" />
               <folding>
                 <element signature="e#1042#2704#0" expanded="false" />
                 <element signature="e#2741#4414#0" expanded="false" />
                 <element signature="e#4496#4533#0" expanded="false" />
                 <element signature="e#5035#5067#0" expanded="false" />
+                <element signature="e#5240#5273#0" expanded="false" />
                 <element signature="e#7553#7585#0" expanded="false" />
-                <element signature="e#9711#9748#0" expanded="false" />
-                <element signature="e#10855#10887#0" expanded="false" />
-                <element signature="e#11719#11745#0" expanded="false" />
+                <element signature="e#10862#10894#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -125,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnemyStinger.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EnemyStinger.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/EnemyStinger.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38846573" vertical-offset="2091" max-vertical-offset="3196">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="3196">
               <caret line="153" column="20" selection-start-line="153" selection-start-column="20" selection-end-line="153" selection-end-column="20" />
               <folding>
                 <element signature="n#!!doc;n#EnemyStinger#0" expanded="false" />
@@ -141,8 +140,8 @@
       <file leaf-file-name="level.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/level.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2087" max-vertical-offset="3128">
-              <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="934" max-vertical-offset="3128">
+              <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc;n#Level#0" expanded="false" />
                 <element signature="e#3174#3296#0" expanded="false" />
@@ -176,13 +175,13 @@
         <option value="$PROJECT_DIR$/scripts/jetPuffs.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/scripts/mainMenu.js" />
-        <option value="$PROJECT_DIR$/scripts/karnage.js" />
-        <option value="$PROJECT_DIR$/scripts/level.js" />
         <option value="$PROJECT_DIR$/scripts/enemyDrone.js" />
         <option value="$PROJECT_DIR$/scripts/player.js" />
         <option value="$PROJECT_DIR$/scripts/weaponMissile.js" />
         <option value="$PROJECT_DIR$/scripts/powerUp.js" />
         <option value="$PROJECT_DIR$/scripts/EnemyStinger.js" />
+        <option value="$PROJECT_DIR$/scripts/level.js" />
+        <option value="$PROJECT_DIR$/scripts/karnage.js" />
       </list>
     </option>
   </component>
@@ -403,7 +402,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -751,23 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/karnage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="665" max-vertical-offset="2465">
-          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding>
-            <element signature="e#1042#2704#0" expanded="false" />
-            <element signature="e#2741#4414#0" expanded="false" />
-            <element signature="e#4496#4533#0" expanded="false" />
-            <element signature="e#5035#5067#0" expanded="false" />
-            <element signature="e#7553#7585#0" expanded="false" />
-            <element signature="e#9711#9748#0" expanded="false" />
-            <element signature="e#10855#10887#0" expanded="false" />
-            <element signature="e#11719#11745#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/enemyDrone.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="2669">
@@ -810,10 +792,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/EnemyStinger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="3196">
+          <caret line="153" column="20" selection-start-line="153" selection-start-column="20" selection-end-line="153" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc;n#EnemyStinger#0" expanded="false" />
+            <element signature="e#6361#6394#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/level.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2087" max-vertical-offset="3128">
-          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1597" max-vertical-offset="3128">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#Level#0" expanded="false" />
             <element signature="e#3174#3296#0" expanded="false" />
@@ -824,13 +817,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/EnemyStinger.js">
+    <entry file="file://$PROJECT_DIR$/scripts/karnage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38846573" vertical-offset="2091" max-vertical-offset="3196">
-          <caret line="153" column="20" selection-start-line="153" selection-start-column="20" selection-end-line="153" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.5353645" vertical-offset="970" max-vertical-offset="2465">
+          <caret line="262" column="49" selection-start-line="262" selection-start-column="49" selection-end-line="262" selection-end-column="49" />
           <folding>
-            <element signature="n#!!doc;n#EnemyStinger#0" expanded="false" />
-            <element signature="e#6361#6394#0" expanded="false" />
+            <element signature="e#1042#2704#0" expanded="false" />
+            <element signature="e#2741#4414#0" expanded="false" />
+            <element signature="e#4496#4533#0" expanded="false" />
+            <element signature="e#5035#5067#0" expanded="false" />
+            <element signature="e#5240#5273#0" expanded="false" />
+            <element signature="e#7553#7585#0" expanded="false" />
+            <element signature="e#10862#10894#0" expanded="false" />
           </folding>
         </state>
       </provider>

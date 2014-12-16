@@ -182,7 +182,7 @@ function Level(){
                 for(var x = 0; x < this.currentPowerUps.length; x++){
                         this.currentPowerUps[x].type.PhaserObj.destroy();
                 }
-                gameMode = 4;
+                engine.gameMode = 4;
             }
         }
 
